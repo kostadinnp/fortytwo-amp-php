@@ -1,0 +1,18 @@
+{
+  "name": "fortytwo/api",
+  "type": "library",
+  "description": "A PHP Library for connecting with Fortytwo REST Server to send SMS or Instant Mesagges via VIBER",
+  "keywords": ["sms","im","viber","fortytwo","api","sdk","sms api","sms sdk"],
+  "homepage": "https://fortytwo.com",
+  "authors": [
+      {
+      "name": "Wilfred Mifsud Le Prevost",
+      "email": "wilfred.mifsud@fortytwo.com",
+      "role": "Developer"
+      }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "ext-curl": "*"
+  }
+}

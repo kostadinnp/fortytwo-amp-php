@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Fortytwo Message PHP SDK API</title>
+    <script type="text/javascript" src="assets/syntax.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/main.css" />
+    <link rel="stylesheet" type="text/css"  href="assets/syntax.css" />
+</head>
+
+<body>
+
+<style type="text/css">
+    .underline {
+        text-decoration: underline;
+    }
+    .spacer {
+        float: left;
+        width: 100%;
+        height: 50px;
+    }
+    .menu_container {
+        position: fixed;
+        top: 0;
+        right: 50px;
+        color: #fff;
+    }
+    .main-nav > li a {
+        color: #fff !important;
+    }
+    .btn-login,
+    .btn-signup {
+        font-family: ProximaNovaSemibold, sans-serif;
+    }
+    .main-nav > li.nav-group {
+        margin-top: 18px;
+    }
+    .snippet-menu {
+        display: none !important;
+    }
+    .doc-container {
+        padding: 50px;
+    }
+    h3 {
+        font-size: 50px;
+    }
+    h3 {
+        margin-top: 50px;
+        font-size: 30px;
+        color: #00d1ff;
+    }
+    body {
+        margin-top: 90px;
+    }
+    .header {
+        background-color: rgb(0, 35, 69);
+        padding: 20px;
+        padding-left: 50px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 80px;
+        z-index: 99999999;
+    }
+    .clear {
+        clear: both;
+        float: left;
+        width: 100%;
+    }
+
+    /**
+    Print View
+    **/
+    @media print {
+        .spacer {
+            display: block; page-break-after:auto ;
+        }
+        .doc-container {
+            padding:0 !important;
+        }
+        .col-md-12,.col-md-6 {
+            padding:0 !important;
+        }
+        .snippet-wrap pre.sh_sourceCode {
+            box-shadow: none !important;
+        }
+    }
+</style>
+
+
+<div class="header hidden-print" >
+    <a href="http://fortytwo.com/apis" target="_blank">
+        <img width="200px" class="img-responsive" src="assets/fortytwo-light.png" />
+    </a>
+    <div class="menu_container">
+        <ul id="menu-main" class="main-nav nav navbar-nav navbar-right nav-lt hidden-xs">
+            <li id="menu-item-1133" class="nav-why-fortytwo menu-item menu-item-type-post_type menu-item-object-page menu-item-1133"><a href="https://www.fortytwo.com/why-fortytwo/"><span class="nav-text">Why Fortytwo</span></a>
+            </li>
+            <li id="menu-item-1132" class="nav-solutions menu-item menu-item-type-post_type menu-item-object-page menu-item-1132"><a href="https://www.fortytwo.com/solutions/"><span class="nav-text">Solutions</span></a>
+            </li>
+            <li id="menu-item-1131" class="nav-pricing menu-item menu-item-type-post_type menu-item-object-page menu-item-1131"><a href="https://www.fortytwo.com/pricing/"><span class="nav-text">Pricing</span></a>
+            </li>
+            <li id="menu-item-1130" class="nav-about menu-item menu-item-type-post_type menu-item-object-page menu-item-1130"><a href="https://www.fortytwo.com/about/"><span class="nav-text">About</span></a>
+            </li>
+            <li id="menu-item-1802" class="nav-resources menu-item menu-item-type-post_type menu-item-object-page menu-item-1802"><a href="https://www.fortytwo.com/apis/"><span class="nav-text">Developers</span></a>
+            </li>
+            <li id="nav-extra" class="nav-group hidden-xs">
+                <button onclick="window.open('https://controlpanel.fortytwo.com/','_blank')" class="btn btn-login">Login</button>
+                <button onclick="window.location.href='https://www.fortytwo.com/register/'" class="btn btn-signup">Sign-up</button>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="doc-container">
+    <h1>Fortytwo Message PHP SDK API (Version 1.1)</h1>
+    <p>
+        Fortytwo offers numerous ways for you to connect your applications to our Advanced Messaging Platform, allowing your systems to seamlessly communicate with your customers anywhere in the world.
+        <br/>
+        <br/> For more information technical information go to our <a href="https://www.fortytwo.com/apis/" target="_blank"><b>API Section &raquo;</b></a>
+    </p>
+    <h3>Sign up for a FREE ACCOUNT</h3>
+    <p>
+        To try out our IM/SMS Messaging system you have to <a href="https://www.fortytwo.com/register/" target="_blank"><b>Register</b></a> for a FREE Test Account.
+    </p>
+    <div class="row col-xs-12 col-lg-12 col-sm-12 col-md-12 hidden-print">
+        <div class="row mt col-xs-5 col-lg-5 col-sm-5 col-md-5">
+            <div class="col-sm-4 mb-xs">
+                <p><img src="assets/icon_cash.png" alt="icon_cash" width="68" height="60">
+                </p>
+                <h3 style="margin: 20px 0 5px 0;">Free&nbsp;test</h3>
+                <h4>credit</h4>
+                <p>Start your trial with free test credit and get full beneﬁts from our platform.</p>
+            </div>
+            <div class="col-sm-4 mb-xs">
+                <p><img src="assets/icon_network.png" alt="icon_network" width="62" height="60">
+                </p>
+                <h3 style="margin: 20px 0 5px 0;">1,000+</h3>
+                <h4>networks</h4>
+                <p>Over 1,000 networks to reach your target worldwide.</p>
+            </div>
+            <div class="col-sm-4">
+                <p><img src="assets/icon_gear.png" alt="icon_gear" width="62" height="60">
+                </p>
+                <h3 style="margin: 20px 0 5px 0;">24/7</h3>
+                <h4>live support</h4>
+                <p>Our group of multilingual live support agents can help you anytime along the way.</p>
+            </div>
+        </div>
+        <div class="row mt col-xs-7 col-lg-7 col-sm-7 col-md-7"></div>
+    </div>
+    <button onclick="window.location.href='https://www.fortytwo.com/register/'" class="hidden-print btn btn-large btn-signup">Sign-up</button>
+    <div class="spacer"></div>
+    <h3>Requirements</h3>
+    <ul>
+        <li>minimum PHP 5.3</li>
+        <li>CURL PHP Extension</li>
+        <li>Valid Mobile Phone Number (+ Viber if using IM Messages)</li>
+    </ul>
+    <div class="spacer"></div>
+    <h3>Setup & Installation</h3>
+    <ul>
+        <li>Download this library and add the "src/fortytwo" folder to your project</li>
+        <li>Include the PHP File called 'FortytwoMessage.php'</li>
+        <li>Sign up for a FREE TEST Account from Fortytwo website and setup the SMS/IM profile</li>
+        <li>Upon setting this up as needed, a unique Token will be generated to be used within the given code.</li>
+        <li>Use an example from below to send an SMS/Instant Message</li>
+    </ul>
+    <div class="spacer"></div>
+    <h3>REST Service Endpoint</h3>
+    <b>Host URL:</b> https://rest.fortytwo.com/
+    <br/>
+    <br/>
+    <b>Service Endpoint:</b> /1/im
+    <br/>
+    <br/>
+    <b>Content-Type:</b> application/json; charset=utf-8
+    <br/>
+    <br/>
+    <b>Verb (HTTP Method):</b> POST
+    <h3>Sending SMS</h3>
+    <p>The SMS REST interface is an application hosted on a server that listens for HTTP requests containing SMS message data encoded in JSON. It processes the HTTP requests and their associated SMS message data and sends the required SMS messages for onward delivery. The SMS REST interface sends back a JSON response containing information about the submitted SMS messages such as the message identifiers of the sent SMS messages.</p>
+    <p>The SMS REST interface also includes a callback application which sends back delivery reports. The callback application achieves this by sending HTTP callback requests to your HTTP server (which must return an appropriate response) in order for delivery reports to be received. The figure below illustrates the architectural setup.</p>
+    <p>&nbsp;</p>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5">
+            <h4>SMS REST API</h4>
+            <p><img class="wp-image-1616 img-responsive" src="assets/sms-rest-api.gif" alt="SMS REST API Diagram" width="844px" height="303px">
+            </p>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-12 col-lg-2"></div>
+        <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5">
+            <h4>SMS REST API CALLBACK</h4>
+            <p><img class="wp-image-1617 img-responsive" src="assets/sms-rest-callback.gif" alt="SMS REST API Callback Diagram" width="862px" height="302px">
+            </p>
+        </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                <h4>Send SMS to one Mobile Number</h4>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                <p>Use the method called <strong>sendSMS()</strong> to send a very simple SMS to a mobile phone.</p>
+                <p>Example File: <a target="_blank" href="/examples/send_sms.php">/examples/send_sms.php</a>
+                </p>
+
+                <p class="underline">The parameters for this method are: </p>
+                <ul>
+                    <li>Mobile Phone Number with prefix</li>
+                    <li>Content for SMS Message</li>
+                    <li>(Optional: SenderID)</li>
+                    <li>(Optional: Route)</li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                <h5><b>PHP Code Sample: </b></h5>
+                <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send an SMS to one mobile phone number</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendSMS</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send an SMS to one mobile phone number
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+$return = $message-&gt;sendSMS('INSERT_MOBILE_HERE','INSERT_CONTENT_HERE');
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+        </div>
+        <div class="spacer"></div>
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                <h4>Send SMS to multiple Mobile Number</h4>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                <p>Use the method called <strong>sendMultipleSMS()</strong> to send a very simple SMS to multiple mobile phone.</p>
+                <p>Example File: <a target="_blank" href="/examples/send_multiple_sms.php">/examples/send_multiple_sms.php</a>
+                </p>
+                <p class="underline">The parameters for this method are: </p>
+                <ul>
+                    <li>Array of Mobile Phone Numbers with prefix</li>
+                    <li>Content for SMS Message</li>
+                    <li>(Optional: SenderID)</li>
+                    <li>(Optional: Route)</li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                <h5><b>PHP Code Sample: </b></h5>
+                <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send SMS to Multiple Phone Numbers</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$arrayNumbers</span> <span class="sh_symbol">=</span> <span class="sh_keyword">array</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendMultipleSMS</span><span class="sh_symbol">(</span><span class="sh_variable">$arrayNumbers</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send SMS to Multiple Phone Numbers
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+$arrayNumbers = array('INSERT_MOBILE_HERE','INSERT_MOBILE_HERE');
+$return = $message-&gt;sendMultipleSMS($arrayNumbers,'INSERT_CONTENT_HERE');
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+        </div>
+        <div class="spacer"></div>
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                <h4>Send Complex SMS</h4>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                <p>Use the method called <strong>sendComplexSMS()</strong> to send a very a complex SMS (used for customisations).</p>
+                <p>Example File: <a target="_blank" href="/examples/send_complex_sms.php">/examples/send_complex_sms.php</a>
+                </p>
+                <p class="underline">The parameters for this method are: </p>
+                <ul>
+                    <li>Object of type Destination (incl. all its needed properties)</li>
+                    <li>Object of type SMSContent (incl. all its needed properties)</li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                <h5><b>PHP Code Sample: </b></h5>
+                <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send Complex SMS</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">setTTL</span><span class="sh_symbol">(</span><span class="sh_number">500</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$destination1</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">Destination</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_NUMBER_1'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$destination2</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">Destination</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_NUMBER_2'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$destinationArray</span> <span class="sh_symbol">=</span> <span class="sh_keyword">array</span><span class="sh_symbol">(</span><span class="sh_variable">$destination1</span><span class="sh_symbol">,</span><span class="sh_variable">$destination2</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$SMSContent</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">SMSContent</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$SMSContent</span><span class="sh_symbol">-&gt;</span><span class="sh_function">setSenderId</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_SENDER_ID'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendComplexSMS</span><span class="sh_symbol">(</span><span class="sh_variable">$destinationArray</span><span class="sh_symbol">,</span><span class="sh_variable">$SMSContent</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send Complex SMS
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+$message-&gt;setTTL(500);
+
+$destination1 = new Destination('INSERT_MOBILE_NUMBER_1');
+$destination2 = new Destination('INSERT_MOBILE_NUMBER_2');
+$destinationArray = array($destination1,$destination2);
+
+$SMSContent = new SMSContent('INSERT_CONTENT_HERE');
+$SMSContent-&gt;setSenderId('INSERT_SENDER_ID');
+
+$return = $message-&gt;sendComplexSMS($destinationArray,$SMSContent);
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+            </div>
+            <div class="spacer"></div>
+            <h3>Sending IM via VIBER</h3>
+            <p>
+                The IM REST interface is an application hosted on a server that listens for HTTP requests containing IM message data and/or SMS message data encoded in JSON. It processes the HTTP requests and their associated IM and/or SMS message data, performs some routing logic, and sends the required messages for onward delivery. The IM REST interface sends back a JSON response containing information about the submitted IM and/or SMS messages such as the message identifiers of the sent messages.
+                <br/>
+                <br/> The IM REST interface allows undelivered IM messages to automatically fallback to the use of the SMS gateway if so desired.
+                <br/>
+                <br/> The IM REST interface also includes a callback application which sends back delivery reports. The callback application achieves this by sending HTTP callback requests to your HTTP server (which must return an appropriate response) in order for delivery reports to be received. The figure below illustrates the architectural setup.
+                <br/>
+                <br/>
+            </p>
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5">
+                    <h4>IM REST API</h4>
+                    <p><img class="wp-image-1616 img-responsive" src="assets/im-rest-api.gif" alt="SMS REST API Diagram" width="844px" height="303px">
+                    </p>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12 col-lg-2"></div>
+                <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5">
+                    <h4>IM REST API CALLBACK</h4>
+                    <p><img class="wp-image-1617 img-responsive" src="assets/im-rest-callback.gif" alt="SMS REST API Callback Diagram" width="862px" height="302px">
+                    </p>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                        <h4>Send IM via VIBER to one Mobile Number</h4>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                        <p>Use the method called <strong>sendIM()</strong> to send an Instant Message via VIBER to a mobile phone.</p>
+                        <p>Example File: <a target="_blank" href="/examples/send_im.php">/examples/send_im.php</a>
+                        </p>
+                        <p class="underline">The parameters for this method are: </p>
+                        <ul>
+                            <li>Mobile Phone Number with prefix (must have VIBER installed)</li>
+                            <li>Content for IM Message</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                        <h5><b>PHP Code Sample: </b></h5>
+                        <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send IM Message to one Phone Number</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendIM</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send IM Message to one Phone Number
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+$return = $message-&gt;sendIM('INSERT_MOBILE_HERE','INSERT_CONTENT_HERE');
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                            <h4>Send IM via VIBER to multiple Mobile Number</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                            <p>Use the method called <strong>sendMultipleIM()</strong> to send Instant Messages via VIBER to a range of mobile phones.</p>
+                            <p>Example File: <a target="_blank" href="/examples/send_multiple_im.php">/examples/send_multiple_im.php</a>
+                            </p>
+                            <p class="underline">The parameters for this method are: </p>
+                            <ul>
+                                <li>Array of Mobile Phone Number with prefix (must have VIBER installed)</li>
+                                <li>Content for IM Message</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                            <h5><b>PHP Code Sample: </b></h5>
+                            <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send IM Message to multiple Phone numbers</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$arrayNumbers</span> <span class="sh_symbol">=</span> <span class="sh_keyword">array</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendMultipleIM</span><span class="sh_symbol">(</span><span class="sh_variable">$arrayNumbers</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send IM Message to multiple Phone numbers
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+$arrayNumbers = array('INSERT_MOBILE_HERE','INSERT_MOBILE_HERE');
+$return = $message-&gt;sendMultipleIM($arrayNumbers,'INSERT_CONTENT_HERE');
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+                </div>
+                <div class="spacer"></div>
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                        <h4>Send Complex IM via VIBER</h4>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                        <p>Use the method called <strong>sendComplexIM()</strong> to send a very a complex IM (used for customisations).</p>
+                        <p>Example File: <a target="_blank" href="/examples/send_complex_im.php">/examples/send_complex_im.php</a>
+                        </p>
+                        <p class="underline">The parameters for this method are: </p>
+                        <ul>
+                            <li>Object of type Destination (incl. all its needed properties)</li>
+                            <li>Object of type IMContent (incl. all its needed properties)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                        <h5><b>PHP Code Sample: </b></h5>
+                        <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send Complex IM</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$destination1</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">Destination</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_NUMBER_1'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$destination2</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">Destination</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_NUMBER_2'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$destinationArray</span> <span class="sh_symbol">=</span> <span class="sh_keyword">array</span><span class="sh_symbol">(</span><span class="sh_variable">$destination1</span><span class="sh_symbol">,</span><span class="sh_variable">$destination2</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$imContent</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">IMContent</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_IM_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendComplexIM</span><span class="sh_symbol">(</span><span class="sh_variable">$destinationArray</span><span class="sh_symbol">,</span><span class="sh_variable">$imContent</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send Complex IM
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+
+$destination1 = new Destination('INSERT_MOBILE_NUMBER_1');
+$destination2 = new Destination('INSERT_MOBILE_NUMBER_2');
+$destinationArray = array($destination1,$destination2);
+
+$imContent = new IMContent('INSERT_IM_CONTENT_HERE');
+
+$return = $message-&gt;sendComplexIM($destinationArray,$imContent);
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+                    </div>
+                    <div class="spacer"></div>
+                    <h3>Sending IM or SMS (depending on Message plan selected)</h3>
+                    <p>
+                        The developer can opt to send the message via SMS (if cheaper) rather than via IM. (Prices can be checked from the prices page in the "Fortytwo IM Control Panel").
+                    </p>
+                    <p>
+                        The Token generated can also be set to have the current "Message Plan" selected automatically by adjusting it in the Control Panel. The Message Plan routing can also be overriden with the $cheapestFirst parameter (If this is set to 'TRUE' and SMS is cheaper than IM, then SMS would be used)
+                    </p>
+                    <p>
+                        In some cases, the destination mobile phone might not have the IM platform (e.g Viber) installed, in this case the developer can opt to do a fallback mechanism to send an SMS in case this happens. The IM message might fallback to SMS if
+                    <p>
+                    <ul>
+                        <li>The Phone does not have a VIBER account</li>
+                        <li>The Phone might have VIBER installed but does not recieve any messages for whatever reason and the TTL (time to live) have expired.</li>
+                    </ul>
+                    </p>
+                    <div class="spacer"></div>
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="1zcol-md-12 col-sm-12 col-xs-12 col-lg-12">
+                                <h4>Send an Instant Message or SMS to one destination</h4>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                <p>Use the method called <strong>sendInstantMessageOrSms()</strong> to send Instant Messages or SMS depending on the selected Message Plan.</p>
+                                <p>Example File: <a target="_blank" href="/examples/send_im_or_sms.php">/examples/send_im_or_sms.php</a>
+                                </p>
+                                <p class="underline">The parameters for this method are: </p>
+                                <ul>
+                                    <li>Mobile Phone Number with prefix</li>
+                                    <li>Content for IM Message</li>
+                                    <li>Content for SMS Message</li>
+                                    <li>(Optional: cheapestFirst [default:FALSE] - If this is set to 'TRUE' and SMS is cheaper than IM, then SMS would be used)</li>
+                                    <li>(Optional: SenderID)</li>
+                                    <li>(Optional: Route)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                <h5><b>PHP Code Sample: </b></h5>
+                                <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send an Instant Message or SMS to one destination</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendInstantMessageOrSMS</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_IM_CONTENT_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_SMS_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send an Instant Message or SMS to one destination
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+$return = $message-&gt;sendInstantMessageOrSMS('INSERT_MOBILE_HERE','INSERT_IM_CONTENT_HERE','INSERT_SMS_CONTENT_HERE');
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+                            </div>
+                            <div class="spacer"></div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                                    <h4>Send an Instant Message or SMS to multiple destinations</h4>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                    <p>Use the method called <strong>sendMultipleInstantMessageOrSms()</strong> to send multiple Instant Messages or SMS depending on the selected Message Plan.</p>
+                                    <p>Example File: <a target="_blank" href="/examples/send_multiple_im_or_sms.php">/examples/send_multiple_im_or_sms.php</a>
+                                    </p>
+                                    <p class="underline">The parameters for this method are: </p>
+                                    <ul>
+                                        <li>Array of Mobile Phone Number with prefix</li>
+                                        <li>Content for IM Message</li>
+                                        <li>Content for SMS Message</li>
+                                        <li>(Optional: cheapestFirst [default:FALSE] - If this is set to 'TRUE' and SMS is cheaper than IM, then SMS would be used)</li>
+                                        <li>(Optional: SenderID)</li>
+                                        <li>(Optional: Route)</li>
+                                    </ul>
+                                </div>
+                                <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send an Instant Message or SMS to multiple destinations</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$arrayNumbers</span> <span class="sh_symbol">=</span> <span class="sh_keyword">array</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendMultipleInstantMessageOrSMS</span><span class="sh_symbol">(</span><span class="sh_variable">$arrayNumbers</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_IM_CONTENT_HERE'</span><span class="sh_symbol">,</span><span class="sh_string">'INSERT_SMS_CONTENT_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send an Instant Message or SMS to multiple destinations
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+$arrayNumbers = array('INSERT_MOBILE_HERE','INSERT_MOBILE_HERE');
+$return = $message-&gt;sendMultipleInstantMessageOrSMS($arrayNumbers,'INSERT_IM_CONTENT_HERE','INSERT_SMS_CONTENT_HERE');
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+                            </div>
+                            <div class="spacer"></div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                                    <h4>Send Complex Instant Message or SMS</h4>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                    <p>Use the method called <strong>sendComplexInstantMessageOrSms()</strong> to send custom Instant Messages or SMS depending on the selected Message Plan.</p>
+                                    <p>Example File: <a target="_blank" href="/examples/send_complex_im_or_sms.php">/examples/send_complex_im_or_sms.php</a>
+                                    </p>
+                                    <p class="underline">The parameters for this method are: </p>
+                                    <ul>
+                                        <li>Object of type Destination (incl. all its needed properties)</li>
+                                        <li>Object of type IMContent (incl. all its needed properties)</li>
+                                        <li>Object of type SMSContent (incl. all its needed properties)</li>
+                                        <li>(Optional: cheapestFirst [default:FALSE] - If this is set to 'TRUE' and SMS is cheaper than IM, then SMS would be used)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                    <h5><b>PHP Code Sample: </b></h5>
+                                    <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send Complex Instant Message or SMS (taking LOW_COST as a message plan)</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'../src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$message</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">#Add multiple Destinations - Start</span></li><li><span class="sh_variable">$destination1</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">Destination</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$destination2</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">Destination</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_MOBILE_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$destinationArray</span> <span class="sh_symbol">=</span> <span class="sh_keyword">array</span><span class="sh_symbol">(</span><span class="sh_variable">$destination1</span><span class="sh_symbol">,</span><span class="sh_variable">$destination2</span><span class="sh_symbol">);</span></li><li><span class="sh_comment">#Add multiple Destinations - End</span></li><li></li><li><span class="sh_variable">$imContent</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">IMContent</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_IM_CONTENT'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$SMSContent</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">SMSContent</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_SMS_CONTENT'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$SMSContent</span><span class="sh_symbol">-&gt;</span><span class="sh_function">setSenderId</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_SENDER_ID'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$return</span> <span class="sh_symbol">=</span> <span class="sh_variable">$message</span><span class="sh_symbol">-&gt;</span><span class="sh_function">sendComplexInstantMessageOrSMS</span><span class="sh_symbol">(</span><span class="sh_variable">$destinationArray</span><span class="sh_symbol">,</span><span class="sh_variable">$imContent</span><span class="sh_symbol">,</span><span class="sh_variable">$SMSContent</span><span class="sh_symbol">,</span>true<span class="sh_symbol">);</span></li><li></li><li><span class="sh_comment">//Handle the Return</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$return</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send Complex Instant Message or SMS (taking LOW_COST as a message plan)
+require_once('../src/fortytwo/FortytwoMessage.php');
+
+$message = new FortytwoMessage('INSERT_TOKEN_HERE');
+
+#Add multiple Destinations - Start
+$destination1 = new Destination('INSERT_MOBILE_HERE');
+$destination2 = new Destination('INSERT_MOBILE_HERE');
+$destinationArray = array($destination1,$destination2);
+#Add multiple Destinations - End
+
+$imContent = new IMContent('INSERT_IM_CONTENT');
+
+$SMSContent = new SMSContent('INSERT_SMS_CONTENT');
+$SMSContent-&gt;setSenderId('INSERT_SENDER_ID');
+
+$return = $message-&gt;sendComplexInstantMessageOrSMS($destinationArray,$imContent,$SMSContent,true);
+
+//Handle the Return
+var_dump($return);</pre></div></div>
+                                    </div>
+
+
+
+                                <div class="spacer"></div>
+                                <h3>Custom API Calls</h3>
+                                <p>Developers can also opt for building their own JSON Object and sending it to the REST API Server directly.</p>
+                                <div class="spacer"></div>
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    <div class="col-md-12 col-sm-12 col-lg-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                                            <h4>Post custom JSON Data to REST API</h4>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                            <p>In the event that the developer wants to build his own JSON Object rather than using the simplified methods supplied above, the <strong>postData()</strong> method can be used.</p>
+                                            <p>Example File: <a target="_blank" href="/examples/json_post.php">/examples/json_post.php</a>
+                                            </p>
+                                            <p class="underline">The parameters for this method are: </p>
+                                            <ul>
+                                                <li>JSON Array (as outlined in Fortytwo.com <a href="https://www.fortytwo.com/apis/" target="_blank">API Section</a>)</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                            <h5><b>PHP Code Sample: </b></h5>
+                                            <div class="snippet-container">
+                                                <div class="sh_default snippet-wrap">
+                                                    <div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a>
+                                                    </div><pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#Send a JSON Object to REST API Server</span></li><li><span class="sh_comment">#Check Documentation on how to generate a JSON Object</span></li><li><span class="sh_preproc">require_once</span><span class="sh_symbol">(</span><span class="sh_string">'src/fortytwo/FortytwoMessage.php'</span><span class="sh_symbol">);</span></li><li></li><li><span class="sh_variable">$messageObject</span> <span class="sh_symbol">=</span> <span class="sh_keyword">new</span> <span class="sh_function">FortytwoMessage</span><span class="sh_symbol">(</span><span class="sh_string">'INSERT_TOKEN_HERE'</span><span class="sh_symbol">);</span></li><li><span class="sh_variable">$response</span> <span class="sh_symbol">=</span> <span class="sh_variable">$messageObject</span><span class="sh_symbol">-&gt;</span><span class="sh_function">postData</span><span class="sh_symbol">(</span><span class="sh_string">'{</span></li><li><span class="sh_string">    "destinations": [</span></li><li><span class="sh_string">        {</span></li><li><span class="sh_string">            "number": "INSERT_MOBILE_NUMBER"</span></li><li><span class="sh_string">        }</span></li><li><span class="sh_string">    ],</span></li><li><span class="sh_string">    "sms_content": {</span></li><li><span class="sh_string">        "message": "INSERT_SMS_CONTENT",</span></li><li><span class="sh_string">        "sender_id": "INSERT_SENDER_ID"</span></li><li><span class="sh_string">    }</span></li><li><span class="sh_string">}'</span><span class="sh_symbol">);</span></li><li><span class="sh_function">var_dump</span><span class="sh_symbol">(</span><span class="sh_variable">$response</span><span class="sh_symbol">);</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">#Send a JSON Object to REST API Server
+#Check Documentation on how to generate a JSON Object
+require_once('src/fortytwo/FortytwoMessage.php');
+
+$messageObject = new FortytwoMessage('INSERT_TOKEN_HERE');
+$response = $messageObject-&gt;postData('{
+    "destinations": [
+        {
+            "number": "INSERT_MOBILE_NUMBER"
+        }
+    ],
+    "sms_content": {
+        "message": "INSERT_SMS_CONTENT",
+        "sender_id": "INSERT_SENDER_ID"
+    }
+}');
+var_dump($response);</pre>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="spacer"></div>
+                                        <h3>API Response & Validation</h3>
+                                        <p>This PHP Library acts a bridge to Fortytwo REST API server, thus any data validation is handled through the REST API itself.</p>
+                                        <p>The request itself will return an JSON Object (String) with all the relevant information (e.g Invalid Token) and its up to the Developer on how they want to handle/display this information in their system.</p>
+                                        <p>If the response returned with HTTP Status Code set to <strong>"200"</strong>, then the request was successful, any other status means that there was an error.</p>
+
+                                        <p>Read more about <strong><a href="https://www.fortytwo.com/apis/im-gateway-rest-api/response/" target="_blank">Responses &raquo;</a></strong></p>
+                                        <div class="spacer"></div>
+                                        <h4>Sample Validation JSON Response for Errors:</h4>
+                                        <p>If the request had validation errors the API will return a JSON object as shown below:</p>
+                                        <div class="snippet-container">
+                                            <div class="sh_default snippet-wrap">
+                                                <div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a>
+                                                </div>
+                                                <pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_cbracket">{</span></li><li>   <span class="sh_string">"api_job_id"</span><span class="sh_symbol">:</span> <span class="sh_string">"54a84753-492b-438a-9e08-15fad2057710"</span><span class="sh_symbol">,</span></li><li>   <span class="sh_string">"result_info"</span><span class="sh_symbol">:</span> <span class="sh_cbracket">{</span></li><li>      <span class="sh_string">"status_code"</span><span class="sh_symbol">:</span> <span class="sh_number">403</span><span class="sh_symbol">,</span></li><li>    <span class="sh_string">"description"</span><span class="sh_symbol">:</span> <span class="sh_string">"Forbidden: Validation error/s has/have occured, Reason/s: DestinationInfo has an invalid [number]</span></li><li><span class="sh_string">    value. Value [avc] does not match pattern [^[1-9][0-9]{6,14}$]. DestinationInfo fields were: MSISDN[number]:[avc];</span></li><li><span class="sh_string">    CUSTOM_ID[custom_id]:[null]; TEXT_PARAMS[params]:[null]"</span></li><li>   <span class="sh_cbracket">}</span><span class="sh_symbol">,</span></li><li>   <span class="sh_string">"results"</span><span class="sh_symbol">:</span> <span class="sh_cbracket">{}</span></li><li><span class="sh_cbracket">}</span></li></ol></pre>
+                                                        <pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">{
+   "api_job_id": "54a84753-492b-438a-9e08-15fad2057710",
+   "result_info": {
+      "status_code": 403,
+    "description": "Forbidden: Validation error/s has/have occured, Reason/s: DestinationInfo has an invalid [number]
+    value. Value [avc] does not match pattern [^[1-9][0-9]{6,14}$]. DestinationInfo fields were: MSISDN[number]:[avc];
+    CUSTOM_ID[custom_id]:[null]; TEXT_PARAMS[params]:[null]"
+   },
+   "results": {}
+}</pre>
+                                            </div>
+                                        </div>
+                                        <div class="spacer"></div>
+                                        <h4>Sample Validation JSON Response for Success</h4>
+                                        <p>If the request was successful the API will return a JSON object as shown below:</p>
+                                        <div class="snippet-container">
+                                            <div class="sh_default snippet-wrap">
+                                                <div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a>
+                                                </div>
+                                                <pre class="shi_pre sh_php snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_cbracket">{</span>  </li><li>   <span class="sh_string">"api_job_id"</span><span class="sh_symbol">:</span><span class="sh_string">"6b6b843c-542225a-4118-8d6c-26ac61009efc"</span><span class="sh_symbol">,</span></li><li>   <span class="sh_string">"result_info"</span><span class="sh_symbol">:</span><span class="sh_cbracket">{</span>  </li><li>      <span class="sh_string">"status_code"</span><span class="sh_symbol">:</span><span class="sh_number">200</span><span class="sh_symbol">,</span></li><li>      <span class="sh_string">"description"</span><span class="sh_symbol">:</span><span class="sh_string">"Request successful (no errors occured and the message has been submitted)"</span></li><li>   <span class="sh_cbracket">}</span><span class="sh_symbol">,</span></li><li>   <span class="sh_string">"results"</span><span class="sh_symbol">:</span><span class="sh_cbracket">{</span>  </li><li>      <span class="sh_string">"35690556699"</span><span class="sh_symbol">:</span><span class="sh_cbracket">{</span>  </li><li>         <span class="sh_string">"message_id"</span><span class="sh_symbol">:</span><span class="sh_string">"14416294250660014003"</span><span class="sh_symbol">,</span></li><li>         <span class="sh_string">"custom_id"</span><span class="sh_symbol">:</span><span class="sh_string">""</span></li><li>      <span class="sh_cbracket">}</span></li><li>   <span class="sh_cbracket">}</span></li><li><span class="sh_cbracket">}</span></li></ol></pre>
+                                                        <pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">{
+   "api_job_id":"6b6b843c-542225a-4118-8d6c-26ac61009efc",
+   "result_info":{
+      "status_code":200,
+      "description":"Request successful (no errors occured and the message has been submitted)"
+   },
+   "results":{
+      "35690556699":{
+         "message_id":"14416294250660014003",
+         "custom_id":""
+      }
+   }
+}</pre>
+                                            </div>
+                                        </div>
+
+                                        <div class="spacer"></div>
+</body>
+
+</html>
